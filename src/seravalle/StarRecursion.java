@@ -31,7 +31,7 @@ public class StarRecursion {
 		{
 			starString (x-1);
 			
-			for (int i = 0; i < Math.pow(2 , x); i ++)
+			for (int i = 0; i < Math.pow(2 , x); i ++)// loop for printing the different 2 to the x 
 				System.out.print("*");
 			
 			System.out.println(""); 
