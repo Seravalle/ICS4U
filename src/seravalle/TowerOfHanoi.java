@@ -9,7 +9,7 @@ import java.util.Scanner;
  */
 public class TowerOfHanoi {
 /**
- * 
+ * main method for displaying and input 
  * @param args
  */
 	public static void main(String[] args) {
@@ -22,7 +22,7 @@ public class TowerOfHanoi {
 
 	}
 /**
- * figures out where to move each disk
+ * figures out where to move each disk and display it to the user 
  * @param x
  * @param a
  * @param b
