@@ -10,6 +10,7 @@ public class Student {
 	private String postalCode;
 	private String phoneNum;
 	private String birthday;
+
 	private long studentID = 323000000;
 
 	public Student() {
@@ -219,5 +220,12 @@ public class Student {
 	public long getStudentNumber() {
 		return this.studentID;
 	}
+
+
+
+
+
+
+	
 
 }
