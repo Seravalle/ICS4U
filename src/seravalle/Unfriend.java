@@ -1,5 +1,7 @@
 package seravalle;
-
+/**
+ * not finished
+ */
 import java.util.Scanner;
 
 public class Unfriend {
