@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 public class SchoolSystem {
 	static Scanner scan = new Scanner(System.in);
-	static Student student1 = new Student();
-	ArrayList<Student> studRecs = new ArrayList<Student>();
+
+	static ArrayList<Student> studRecs = new ArrayList<Student>();
 
 	public static void main(String[] args) throws InterruptedException {
 		int num = 0;
@@ -26,15 +26,19 @@ public class SchoolSystem {
 
 				if (num >= 11 || num <= 0) {
 					System.out.println(" Please enter a number between 1-10 ");
-					Thread.sleep(500);
+					Thread.sleep(1000);
 				}
 
 				else if (num == 1) {
-
+					studRecs.add(new Student());
 					newStudent();
 
 				} else if (num == 2) {
-					printStudent(student1);
+					int stuPick = 0;
+
+					System.out.println(" Which student would you like to print? 1-" + studRecs.size());
+					stuPick = scan.nextInt();
+					printStudent(studRecs.get(stuPick - 1));
 				} else if (num == 3) {
 					printAllStudents();
 				}
@@ -42,11 +46,12 @@ public class SchoolSystem {
 				else if (num == 10) {
 					quit();
 				}
+			} catch (InputMismatchException m) {
 
-			} catch (InputMismatchException m) {// Infinite loop needs to be fixed
 				System.out.println(" Please enter a number between 1-10 ");
-				
-				
+				Thread.sleep(1000);
+
+				scan.nextLine();
 			}
 		}
 	}
@@ -54,39 +59,42 @@ public class SchoolSystem {
 	public static void newStudent() throws InterruptedException {
 
 		System.out.println("Please enter your first name ");
-		student1.setFirstName(scan.nextLine());
+		studRecs.get(studRecs.size() - 1).setFirstName(scan.nextLine());
 		System.out.println("Please enter your last name ");
-		student1.setLastName(scan.nextLine());
+		studRecs.get(studRecs.size() - 1).setLastName(scan.nextLine());
 		System.out.println("Please enter your street address ");
-		student1.setStreetAddress(scan.nextLine());
+		studRecs.get(studRecs.size() - 1).setStreetAddress(scan.nextLine());
 		System.out.println("Please enter your city ");
-		student1.setCity(scan.nextLine());
+		studRecs.get(studRecs.size() - 1).setCity(scan.nextLine());
 		System.out.println("Please enter your province ");
-		student1.setProvince(scan.nextLine());
+		studRecs.get(studRecs.size() - 1).setProvince(scan.nextLine());
 		System.out.println("Please enter your postal code ");
-		student1.setPostalCode(scan.nextLine());
+		studRecs.get(studRecs.size() - 1).setPostalCode(scan.nextLine());
 		System.out.println("Please enter your phone number  ");
-		student1.setPostalCode(scan.nextLine());
+		studRecs.get(studRecs.size() - 1).setPhoneNumber(scan.nextLine());
 		System.out.println("Please enter your birthday ");
-		student1.setBirthday(scan.nextLine());
+		studRecs.get(studRecs.size() - 1).setBirthday(scan.nextLine());
 
 	}
 
 	public static void printStudent(Student student) {
 
-		System.out.println(" First Name: " + student1.getFirstName());
-		System.out.println(" Last Name: " + student1.getLastName());
-		System.out.println(" Street Address: " + student1.getStreetAddress());
-		System.out.println(" City: " + student1.getCity());
-		System.out.println(" Province: " + student1.getProvince());
-		System.out.println(" Postal Code: " + student1.getPostalCode());
-		System.out.println(" Phone Number: " + student1.getPhoneNumber());
-		System.out.println(" Birthday: " + student1.getBirthday());
+		System.out.println(" First Name: " + student.getFirstName());
+		System.out.println(" Last Name: " + student.getLastName());
+		System.out.println(" Street Address: " + student.getStreetAddress());
+		System.out.println(" City: " + student.getCity());
+		System.out.println(" Province: " + student.getProvince());
+		System.out.println(" Postal Code: " + student.getPostalCode());
+		System.out.println(" Phone Number: " + student.getPhoneNumber());
+		System.out.println(" Birthday: " + student.getBirthday());
+		System.out.println(" Student ID: " + student.getStudentNumber());
 
 	}
 
 	public static void printAllStudents() {
-
+		for (int i = 0; i < studRecs.size(); i++) {
+			printStudent(studRecs.get(i));
+		}
 	}
 
 	public static void quit() {
