@@ -1,5 +1,9 @@
 package seravalle;
-
+/**
+ * 
+ * @author Adam Seravalle
+ *student database progrgam
+ */
 public class Student {
 
 	private String firstName;
