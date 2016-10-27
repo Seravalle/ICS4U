@@ -184,6 +184,7 @@ public class Student implements Comparable<Student> {
 	}
 
 	public void setProvince(String provinceName) {
+		provinceName.toLowerCase();
 		this.province = parseProvince(provinceName) ;
 	}
 
@@ -192,20 +193,25 @@ public class Student implements Comparable<Student> {
 	}
 
 	public void setPostalCode(String pCode) {
+		pCode = pCode.toUpperCase();
 		this.postalCode = pCode;
-		boolean valid = false;
-		//while (valid == false) {
-			//if (!(Character.isLetter(postalCode.charAt(0)) && Character.isDigit(postalCode.charAt(1))
-				//	&& Character.isLetter(postalCode.charAt(2)) && (postalCode.charAt(3) == ' ')
-					//&& Character.isDigit(postalCode.charAt(4)) && Character.isLetter(postalCode.charAt(5))
-					//&& Character.isDigit(postalCode.charAt(6)))) {
-				//System.out.println(" Please enter a valid postal code ");
-				//valid = true;
-			//}
-		//}
+	
 		
 	}
-
+    public boolean checkPostalCode(String pCode){
+    	
+  	 
+  			if ((!Character.isLetter(pCode.charAt(0)) && Character.isDigit(pCode.charAt(1))
+  					&& Character.isLetter(pCode.charAt(2)) && (pCode.charAt(3) == ' ')
+  					&& Character.isDigit(pCode.charAt(4)) && Character.isLetter(pCode.charAt(5))
+  					&& Character.isDigit(pCode.charAt(6)))) {
+  				
+  				
+  			}
+			return false;
+  		
+	
+    }
 	public String getPostalCode() {
 		return this.postalCode;
 	}
@@ -243,11 +249,11 @@ public class Student implements Comparable<Student> {
 	}
 
 	@Override
-	public int compareTo(Student arg0) {
-		if (this.getLastName().compareTo(arg0.getLastName()) == 0) {
-			return (this.getFirstName().compareTo(arg0.getFirstName()));
+	public int compareTo(Student student) {
+		if (this.getLastName().compareTo(student.getLastName()) == 0) {
+			return (this.getFirstName().compareTo(student.getFirstName()));
 		}
-		return (this.getLastName().compareTo(arg0.getLastName()));
+		return (this.getLastName().compareTo(student.getLastName()));
 	}
 
 	public void save() {
@@ -306,10 +312,10 @@ public class Student implements Comparable<Student> {
 			return Provinces.MB;
 		case "on":
 		case "ontario":
-			return Provinces.BC;
+			return Provinces.ON;
 		case "qc":
 		case "quebec":
-			return Provinces.AB;
+			return Provinces.QU;
 		case "nl":
 		case "newfoundland and labrador":
 		case "newfoundland":

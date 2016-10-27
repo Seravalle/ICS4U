@@ -8,25 +8,26 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
  * 
- * School Database program that lets user input students and store them 
+ * School Database program that lets user input students and store them
  * SchoolSystem.java
- * @author Adam Seravalle
- * October 24 2016
+ * 
+ * @author Adam Seravalle October 24 2016
  */
 public class SchoolSystem {
 	static Scanner scan = new Scanner(System.in);
 
 	static ArrayList<Student> studRecs = new ArrayList<Student>();
-	public static File file = new File("students.txt");
-	
-	public static void main(String[] args) throws InterruptedException {
-		
-		String fliename = "students.txt";
+	public static File file = new File("src/students.txt");
+
+	public static void main(String[] args) throws InterruptedException, IOException {
+
+		String fliename = "src/students.txt";
 		int num = 0;
 		boolean choice = false;
 		while (choice == false) {
@@ -40,7 +41,8 @@ public class SchoolSystem {
 				System.out.println(" 5. Save");
 				System.out.println(" 6. Open Flie");
 				System.out.println(" 7. Sort Students");
-
+				System.out.println(" 8. Find Student");
+						
 				System.out.println(" 10. Quit ");
 				num = scan.nextInt();
 				scan.nextLine();
@@ -67,6 +69,16 @@ public class SchoolSystem {
 					System.out.println(" Which student would you like to delete, 1-" + studRecs.size() + "?");
 					delete = Integer.parseInt(scan.nextLine()) - 1;
 					deleteStudent(delete);
+				} else if (num == 5) {
+					saveStudent();
+				} else if (num == 6) {
+					loadStudent();
+				}
+				else if (num == 7){
+					sortStudents();
+				}
+				else if (num == 8){
+					
 				}
 
 				else if (num == 10) {
@@ -80,9 +92,10 @@ public class SchoolSystem {
 				scan.nextLine();
 			}
 		}
+
 	}
 
-	public static void newStudent() throws InterruptedException {
+	public static void newStudent() {
 
 		System.out.println("Please enter your first name ");
 		studRecs.get(studRecs.size() - 1).setFirstName(scan.nextLine());
@@ -95,7 +108,20 @@ public class SchoolSystem {
 		System.out.println("Please enter your province ");
 		studRecs.get(studRecs.size() - 1).setProvince(scan.nextLine());
 		System.out.println("Please enter your postal code (X1X 1X1) ");
+		// studRecs.get(studRecs.size() - 1).checkPostalCode(scan.nextLine());
+		// if ( studRecs.get(studRecs.size() -
+		// 1).checkPostalCode(scan.nextLine())){
+
+		// try{
+
 		studRecs.get(studRecs.size() - 1).setPostalCode(scan.nextLine());
+
+		// }catch(StringIndexOutOfBoundsException e){
+		// System.out.println("a");
+		// }
+		// }
+
+		// System.out.println(" Please enter a valid postal code ");
 		System.out.println("Please enter your phone number (111-111-1111) ");
 		studRecs.get(studRecs.size() - 1).setPhoneNumber(scan.nextLine());
 		System.out.println("Please enter your birthday ");
@@ -126,28 +152,45 @@ public class SchoolSystem {
 	public static void deleteStudent(int i) {
 		studRecs.remove(i);
 	}
-public static void saveStudent() throws IOException{
-	
-	FileOutputStream fos = new FileOutputStream(file);
-	PrintStream write = new PrintStream(fos);
-	
-	file.createNewFile();
-	
-	if (studRecs.size() > 0 ){
-		write.println(studRecs.size()+ "," + studRecs.get(studRecs.size()-1).getStudentNumber());
+
+	public static void saveStudent() throws IOException {
+
+		FileOutputStream fos = new FileOutputStream(file);
+		PrintStream write = new PrintStream(fos);
+
+		file.createNewFile();
+
+		if (studRecs.size() > 0) {
+			write.println(studRecs.size() + "," + studRecs.get(studRecs.size() - 1).getStudentNumber());
+			for (int i = 0; i < studRecs.size(); i++) {
+				write.println(studRecs.get(i).toString());
+			}
+		}
+
 	}
-	
-}
-	
-	public static void loadStudent(){
-		
-		
-		
+
+	public static void loadStudent() throws IOException {
+
+		try {
+			BufferedReader fbr = new BufferedReader(new FileReader(file));
+
+			for (String line; (line = fbr.readLine()) != null;) {
+
+				System.out.println(line);
+			}
+
+			fbr.close();
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	
-	
-	
-	
+
+	public static void sortStudents() {
+		Collections.sort(studRecs);
+	}
+
 	public static void quit() {
 
 		System.exit(0);
