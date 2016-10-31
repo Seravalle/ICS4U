@@ -1,5 +1,10 @@
 package seravalle;
-
+/**
+ * 
+ * InvalidInputException.java
+ * @author Adam Seravalle 
+ *October 31 2016
+ */
 @SuppressWarnings("serial")
 public class InvalidInputException extends Exception {
 
